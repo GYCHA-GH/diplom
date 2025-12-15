@@ -1,8 +1,14 @@
 import type { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import kbkLogo from "../assets/лого.svg"
-import Logo from "../assets/лого2.svg"
+import kbkLogo from "../assets/лого.svg";
+import Logo from "../assets/лого2.svg";
+import lupaIcon from "../assets/lupa.svg";
+// Добавь остальные иконки если есть:
+// import authorsIcon from "../assets/authors.svg";
+// import archiveIcon from "../assets/archive.svg";
+// import supportIcon from "../assets/support.svg";
+// import aboutIcon from "../assets/about.svg";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -17,20 +23,37 @@ export function MainLayout({ children }: MainLayoutProps) {
         <div>
           <div className="h-[100px] flex items-center border-white/10">
             <div className="flex flex-col leading-tight mt-5">
-              <img src={kbkLogo} alt="" />
+              <img src={kbkLogo} alt="КБК Лого" />
             </div>
           </div>
+          
           <nav className="mt-12 font-medium px-4 space-y-1 text-[13px]">
-            <SidebarLink to="/">Поиск <img src="../assets/lupa.svg" alt=""/></SidebarLink>
-            <SidebarLink to="/authors">Авторы</SidebarLink>
-            <SidebarLink to="/archive">Архив</SidebarLink>
-            <SidebarLink to="/support">Поддержка</SidebarLink>
-            <SidebarLink to="/about">О проекте</SidebarLink>
+            <SidebarLink to="/">
+              <img src={lupaIcon} alt="" className="w-4 h-4" />
+              Поиск
+            </SidebarLink>
+            <SidebarLink to="/authors">
+              Авторы
+            </SidebarLink>
+            <SidebarLink to="/archive">
+              Архив
+            </SidebarLink>
+            <SidebarLink to="/support">
+              Поддержка
+            </SidebarLink>
+            <SidebarLink to="/about">
+              О проекте
+            </SidebarLink>
+            <SidebarLink to="/upload">
+              Загрузить 
+            </SidebarLink>
           </nav>
         </div>
 
-        <div className="h-16 border-white/10 flex items-center px-6 text-[13px] cursor-pointer hover:bg-white/5 transition-colors"
-          onClick={() => setIsLoginOpen(true)}>
+        <div
+          className="h-16 border-white/10 flex items-center px-6 text-[13px] cursor-pointer hover:bg-white/5 transition-colors"
+          onClick={() => setIsLoginOpen(true)}
+        >
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
               <span className="text-xl">Г</span>
@@ -45,7 +68,7 @@ export function MainLayout({ children }: MainLayoutProps) {
           Главная страница
         </header>
 
-        <div className="flex-1 px-10 pb-190 flex items-center justify-center">
+        <div className="flex-1 px-10 pb-10 flex items-center justify-center">
           {children}
         </div>
 
@@ -57,7 +80,7 @@ export function MainLayout({ children }: MainLayoutProps) {
           />
         )}
 
-        {/* Форма входа - выезжает из правой части экрана */}
+        {/* Форма входа */}
         <div
           className={`fixed right-0 top-0 h-screen w-[450px] bg-[#3b4a56] rounded-l-3xl flex flex-col items-center pt-14 z-50 shadow-2xl transition-transform duration-500 ease-out ${
             isLoginOpen ? "translate-x-0" : "translate-x-full"
@@ -65,13 +88,13 @@ export function MainLayout({ children }: MainLayoutProps) {
         >
           <button
             onClick={() => setIsLoginOpen(false)}
-            className="absolute top-4 left-4 text-white/60 hover:text-white transition-colors"
+            className="absolute top-4 left-4 text-white/60 hover:text-white transition-colors text-2xl"
           >
             ✕
           </button>
 
           <img src={Logo} alt="" className="mb-6" />
-          
+
           <form className="flex flex-col justify-between p-10 h-[500px] w-full max-w-[400px]">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col">
@@ -110,10 +133,7 @@ export function MainLayout({ children }: MainLayoutProps) {
                 Студент должен получить свой логин и пароль у своего куратора или заведующего кафедры.
               </p>
 
-              <a
-                href="#"
-                className="text-center text-sm font-semibold hover:underline"
-              >
+              <a href="#" className="text-center text-sm font-semibold hover:underline">
                 Забыли логин или пароль?
               </a>
             </div>
@@ -135,9 +155,9 @@ function SidebarLink({ to, children }: SidebarLinkProps) {
       to={to}
       className={({ isActive }) =>
         [
-          "block px-3 py-2 rounded-md",
+          "flex items-center gap-3 px-3 py-2 rounded-md",
           "transition-colors duration-150",
-          isActive ? "bg-white/12" : "hover:bg-white/6",
+          isActive ? "bg-white/12 text-white" : "hover:bg-white/6 text-white/80",
         ].join(" ")
       }
     >
